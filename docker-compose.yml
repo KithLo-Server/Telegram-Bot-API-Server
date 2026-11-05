@@ -1,0 +1,21 @@
+name: telegram_bot_api_server
+
+services:
+  telegram_bot_api_server:
+    image: aiogram/telegram-bot-api:10.3
+    container_name: telegram_bot_api_server
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_API_ID=${TELEGRAM_API_ID}
+      - TELEGRAM_API_HASH=${TELEGRAM_API_HASH}
+      - TELEGRAM_LOCAL=1
+    volumes:
+      - "${TELEGRAM_BOT_API_DATA}:/var/lib/telegram-bot-api"
+    networks:
+      telegram_bot:
+        aliases:
+          - telegram_bot_api_server
+
+networks:
+  telegram_bot:
+    name: telegram_bot
